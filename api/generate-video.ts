@@ -1,6 +1,15 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
 import { videoGenerator } from '../src/services/video-generator.js';
+import { staticServer } from '../src/utils/static-server.js';
+
+let staticStarted = false;
+async function ensureStaticServer() {
+  if (!staticStarted) {
+    await staticServer.start();
+    staticStarted = true;
+  }
+}
 
 // Validation schema matching your existing /routes/video.ts
 const videoRequestSchema = z.object({
@@ -30,6 +39,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.setHeader('Allow', 'POST');
     return res.status(405).end('Method Not Allowed');
   }
+  await ensureStaticServer();
 
   let data;
   try {
