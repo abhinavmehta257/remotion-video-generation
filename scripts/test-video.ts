@@ -66,11 +66,16 @@ async function testAllBackgrounds() {
 }
 
 // Run the tests
-if (require.main === module) {
-  const args = process.argv.slice(2);
-  if (args.includes('--all-backgrounds')) {
-    testAllBackgrounds().catch(console.error);
-  } else {
-    testVideoGeneration().catch(console.error);
+(async () => {
+  try {
+    const args = process.argv.slice(2);
+    if (args.includes('--all-backgrounds')) {
+      await testAllBackgrounds();
+    } else {
+      await testVideoGeneration();
+    }
+  } catch (error) {
+    console.error('Error generating test video:', error);
+    process.exit(1);
   }
-}
+})();

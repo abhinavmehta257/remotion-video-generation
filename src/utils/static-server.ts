@@ -57,8 +57,9 @@ class StaticFileServer {
   }
 
   getUrl(filePath: string): string {
-    const relativePath = path.relative(path.join(os.tmpdir(), 'quiz-video-generator-temp'), filePath);
-    return `http://localhost:${this.port}/${relativePath}`;
+    let relativePath = path.relative(path.join(os.tmpdir(), 'quiz-video-generator-temp'), filePath);
+    relativePath = relativePath.split(path.sep).join('/');
+    return `http://localhost:${this.port}/temp/${relativePath}`;
   }
 
   async shutdown(): Promise<void> {

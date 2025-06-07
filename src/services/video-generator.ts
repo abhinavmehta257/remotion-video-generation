@@ -86,7 +86,7 @@ class VideoGeneratorService {
 
       // Ensure static server is ready
       if (!staticServer.isReady()) {
-        throw new Error('Static file server is not ready. Please try again in a few seconds.');
+        await staticServer.start();
       }
       // Generate TTS for all questions
       const localAudioFiles = await this.generateTTSForQuestions(
@@ -119,7 +119,10 @@ class VideoGeneratorService {
       });
 
       logger.debug('Bundling video components', jobId);
-      const bundled = await bundle(path.join(process.cwd(), 'src/index.ts'));
+      const entryTs = path.join(process.cwd(), 'src/index.ts');
+      const entryJs = path.join(process.cwd(), 'src/index.js');
+      const entry = fs.existsSync(entryJs) ? entryJs : entryTs;
+      const bundled = await bundle(entry);
 
       logger.debug('Configuring video composition', jobId, {
         questionCount: request.questions.length,
