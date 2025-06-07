@@ -1,11 +1,12 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 
 export class CleanupService {
   private tempDir: string;
 
   constructor() {
-    this.tempDir = path.join(process.cwd(), 'temp');
+    this.tempDir = path.join(os.tmpdir(), 'quiz-video-generator-temp');
     this.ensureTempDir();
   }
 

@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import os from 'os';
 
 class StaticFileServer {
   private app: express.Application;
@@ -32,7 +33,7 @@ class StaticFileServer {
     });
 
     // Serve the temp directory
-    this.app.use('/temp', express.static(path.join(process.cwd(), 'temp'), {
+    this.app.use('/temp', express.static(path.join(os.tmpdir(), 'quiz-video-generator-temp'), {
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('.mp3')) {
           res.set('Content-Type', 'audio/mpeg');
@@ -56,7 +57,7 @@ class StaticFileServer {
   }
 
   getUrl(filePath: string): string {
-    const relativePath = path.relative(process.cwd(), filePath);
+    const relativePath = path.relative(path.join(os.tmpdir(), 'quiz-video-generator-temp'), filePath);
     return `http://localhost:${this.port}/${relativePath}`;
   }
 

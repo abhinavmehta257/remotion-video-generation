@@ -1,11 +1,21 @@
+import fs from 'fs';
+import path from 'path';
 import dotenv from 'dotenv';
+import type { DotenvConfigOutput } from 'dotenv';
 import { ConfigurationError } from '../types/index.js';
 
-// Load environment variables
-const result = dotenv.config();
-if (result.error) {
-  console.error('Error loading .env file:', result.error);
+// Load environment variables only if .env file exists
+const envPath = path.join(process.cwd(), '.env');
+let result: DotenvConfigOutput = {};
+if (fs.existsSync(envPath)) {
+  result = dotenv.config();
+  if (result.error) {
+    console.error('Error loading .env file:', result.error);
+  }
+} else {
+  console.log('.env file not found; skipping dotenv load');
 }
+
 console.log('Loaded environment variables:', {
   AZURE_SPEECH_KEY: process.env.AZURE_SPEECH_KEY ? '***' : undefined,
   AZURE_SPEECH_REGION: process.env.AZURE_SPEECH_REGION,

@@ -1,6 +1,7 @@
 import { bundle } from '@remotion/bundler';
 import { renderMedia, selectComposition } from '@remotion/renderer';
 import path from 'path';
+import os from 'os';
 import { azureStorage } from './azure-storage.js';
 import { azureSpeech } from './azure-speech.js';
 import { VideoRequest } from '../types/api.js';
@@ -164,7 +165,7 @@ class VideoGeneratorService {
       });
 
       // Get the job directory and prepare for rendering
-      const jobDir = path.join(process.cwd(), 'temp', jobId);
+      const jobDir = path.join(os.tmpdir(), 'quiz-video-generator-temp', jobId);
       const outputPath = path.join(jobDir, 'output.mp4');
 
       logger.debug('Starting video rendering', jobId);
