@@ -1,7 +1,7 @@
 import { writeFileSync, mkdirSync } from 'fs';
 import { dirname } from 'path';
 import { ConfigurationError } from '../types/index.js';
-import { azureConfig, isValidVoiceName, isValidLocale } from '../utils/azure-config.js';
+import { azureConfig, isValidVoiceName } from '../utils/azure-config.js';
 
 export class AzureSpeechService {
   private baseUrl: string;
@@ -123,7 +123,7 @@ export class AzureSpeechService {
   private async ensureJobDirectory(jobId: string): Promise<void> {
     const jobDir = `temp/${jobId}`;
     try {
-      await new Promise<void>((resolve, reject) => {
+await new Promise<void>((resolve) => {
         mkdirSync(jobDir, { recursive: true });
         resolve();
       });

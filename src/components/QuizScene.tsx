@@ -3,7 +3,7 @@ import { AbsoluteFill, Audio, useCurrentFrame, spring, useVideoConfig, delayRend
 import { GradientBackground } from './backgrounds/GradientBackground';
 import { ParticlesBackground } from './backgrounds/ParticlesBackground';
 import { WavesBackground } from './backgrounds/WavesBackground';
-import { BackgroundStyle } from './backgrounds';
+// import { BackgroundStyle } from './backgrounds';
 import type { z } from 'zod';
 import { schema } from '../Quiz';
 
@@ -39,7 +39,7 @@ const AudioWithFallback: React.FC<{ src: string; startFrom?: number }> = ({ src,
           continueRender(handle);
         };
 
-        audio.onerror = (e: Event | string) => {
+        audio.onerror = () => {
           const mediaError = audio.error;
           const error = new Error(`Failed to load audio at ${src}: ${mediaError?.message || 'unknown error'}`);
           console.error(error);
@@ -88,8 +88,7 @@ export const QuizScene: React.FC<QuizSceneProps> = ({
   primaryColor = '#4A90E2',
   secondaryColor = '#9B51E0',
   questionAudioPath,
-  optionAudioPaths = [],
-  durationInFrames
+  optionAudioPaths = []
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();

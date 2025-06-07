@@ -27,7 +27,7 @@ app.use('/api', videoRoutes);
 const initializeServers = async () => {
   try {
     // Wait for static server to be ready
-    await staticServer['readyPromise'];
+    await staticServer.start();
     console.log(`Static file server initialized on port ${env.server.staticPort}`);
 
     // Start main server

@@ -78,7 +78,6 @@ export class ValidationError extends APIError {
 }
 
 export const createErrorResponse = (
-  statusCode: number,
   message: string,
   details?: any
 ) => ({

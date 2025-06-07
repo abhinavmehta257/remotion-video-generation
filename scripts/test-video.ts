@@ -1,7 +1,6 @@
 import { videoGenerator } from '../src/services/video-generator';
 import { VideoRequest } from '../src/types';
 import dotenv from 'dotenv';
-import path from 'path';
 
 // Load environment variables
 dotenv.config();

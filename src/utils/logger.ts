@@ -16,8 +16,6 @@ interface OperationInfo {
 
 class Logger {
   private logLevel: LogLevel = 'info';
-  private logToFile: boolean = false;
-  private logPath: string = 'logs/app.log';
 
   constructor() {
     // Set log level from environment variable
@@ -25,9 +23,6 @@ class Logger {
     if (envLogLevel && ['debug', 'info', 'warn', 'error'].includes(envLogLevel)) {
       this.logLevel = envLogLevel;
     }
-
-    // Enable file logging if specified
-    this.logToFile = process.env.LOG_TO_FILE === 'true';
   }
 
   private formatMessage(entry: LogEntry): string {

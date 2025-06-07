@@ -18,7 +18,7 @@ export const GradientBackground: React.FC<GradientBackgroundProps> = ({
     [0, 150],
     [0, 360],
     {
-      extrapolateRight: 'loop'
+      extrapolateRight: 'extend'
     }
   );
 

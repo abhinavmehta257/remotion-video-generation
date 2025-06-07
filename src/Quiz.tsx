@@ -2,7 +2,6 @@ import React from 'react';
 import { Composition, staticFile } from 'remotion';
 import { z } from 'zod';
 import { QuizScene } from './components/QuizScene';
-import { BackgroundStyle } from './components/backgrounds';
 
 // Constants for video dimensions and timing
 export const VIDEO_CONFIG = {
