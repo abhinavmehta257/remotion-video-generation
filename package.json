@@ -16,8 +16,8 @@
     "test:video": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" node scripts/test-video.ts",
     "test:backgrounds": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" node scripts/test-video.ts --all-backgrounds",
     "clean": "rimraf temp/* out/*",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+    "lint": "eslint --no-eslintrc --config .eslintrc.json \"**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --no-eslintrc --config .eslintrc.json \"**/*.{ts,tsx}\" --fix"
   },
   "dependencies": {
     "@azure/storage-blob": "*",

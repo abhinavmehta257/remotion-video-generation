@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { EnvConfig, ConfigurationError } from '../types';
+import { EnvConfig, ConfigurationError } from '../types/index.js';
 
 // Environment variable validation schema
 const envSchema = z.object({

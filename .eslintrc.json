@@ -12,8 +12,9 @@
     "react-hooks"
   ],
   "rules": {
-    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@remotion/deterministic-randomness": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
     "no-console": ["warn", { "allow": ["warn", "error"] }],

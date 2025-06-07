@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { VideoGenerationError, ConfigurationError } from '../types';
+import { VideoGenerationError, ConfigurationError } from '../types/index.js';
 
 export class APIError extends Error {
   constructor(
