@@ -7,10 +7,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" node src/server.ts",
+    "start": "npm run start:prod",
     "dev": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" nodemon src/server.ts",
     "dev:remotion": "remotion studio",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
+    "start:prod": "npm run build && node dist/server.js",
     "build:video": "remotion render src/index.ts QuizScene out/video.mp4",
     "test:video": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" node scripts/test-video.ts",
     "test:backgrounds": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" node scripts/test-video.ts --all-backgrounds",
