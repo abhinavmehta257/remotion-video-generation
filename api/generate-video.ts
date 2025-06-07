@@ -1,6 +1,6 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { videoGenerator } from '../src/services/video-generator.ts';
+import { videoGenerator } from '../src/services/video-generator.js';
 
 // Validation schema matching your existing /routes/video.ts
 const videoRequestSchema = z.object({
