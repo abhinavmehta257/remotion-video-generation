@@ -1,0 +1,58 @@
+{
+  "name": "quiz-video-generator",
+  "version": "1.0.0",
+  "description": "Quiz video generator using Remotion and Azure Services",
+  "repository": {},
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" node src/server.ts",
+    "dev": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" nodemon src/server.ts",
+    "dev:remotion": "remotion studio",
+    "build": "tsc",
+    "build:video": "remotion render src/index.ts QuizScene out/video.mp4",
+    "test:video": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" node scripts/test-video.ts",
+    "test:backgrounds": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" node scripts/test-video.ts --all-backgrounds",
+    "clean": "rimraf temp/* out/*",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+  },
+  "dependencies": {
+    "@azure/storage-blob": "*",
+    "@remotion/bundler": "^4.0.314",
+    "@remotion/cli": "^4.0.314",
+    "@remotion/lambda": "^4.0.314",
+    "@remotion/player": "^4.0.314",
+    "@remotion/renderer": "^4.0.314",
+    "@remotion/zod-types": "4.0.314",
+    "cors": "*",
+    "dotenv": "*",
+    "express": "*",
+    "helmet": "*",
+    "microsoft-cognitiveservices-speech-sdk": "*",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "remotion": "^4.0.314",
+    "uuid": "*",
+    "zod": "*"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.314",
+    "@types/cors": "*",
+    "@types/express": "*",
+    "@types/node": "*",
+    "@types/react": "18.2.0",
+    "@types/uuid": "*",
+    "cross-env": "^7.0.3",
+    "eslint": "*",
+    "nodemon": "*",
+    "prettier": "*",
+    "rimraf": "*",
+    "ts-node": "*",
+    "typescript": "*"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
