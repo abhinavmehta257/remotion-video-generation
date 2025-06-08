@@ -6,12 +6,12 @@ interface LogEntry {
   message: string;
   jobId?: string;
   error?: Error;
-  details?: any;
+  details?: unknown;
 }
 
-interface OperationInfo {
+  interface OperationInfo {
   jobId?: string;
-  details?: any;
+  details?: unknown;
 }
 
 class Logger {
@@ -44,7 +44,7 @@ class Logger {
     message: string,
     jobId?: string,
     error?: Error,
-    details?: any
+    details?: unknown
   ): LogEntry {
     return {
       timestamp: new Date().toISOString(),
@@ -78,19 +78,19 @@ class Logger {
     }
   }
 
-  debug(message: string, jobId?: string, details?: any): void {
+  debug(message: string, jobId?: string, details?: unknown): void {
     this.log(this.createLogEntry('debug', message, jobId, undefined, details));
   }
 
-  info(message: string, jobId?: string, details?: any): void {
+  info(message: string, jobId?: string, details?: unknown): void {
     this.log(this.createLogEntry('info', message, jobId, undefined, details));
   }
 
-  warn(message: string, jobId?: string, error?: Error, details?: any): void {
+  warn(message: string, jobId?: string, error?: Error, details?: unknown): void {
     this.log(this.createLogEntry('warn', message, jobId, error, details));
   }
 
-  error(message: string, jobId?: string, error?: Error, details?: any): void {
+  error(message: string, jobId?: string, error?: Error, details?: unknown): void {
     this.log(this.createLogEntry('error', message, jobId, error, details));
   }
 

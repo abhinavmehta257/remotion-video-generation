@@ -4,7 +4,7 @@ import os from 'os';
 
 class StaticFileServer {
   private app: express.Application;
-  private httpServer: any;
+  private httpServer!: import('http').Server;
   private port: number;
   private isServerReady: boolean = false;
 

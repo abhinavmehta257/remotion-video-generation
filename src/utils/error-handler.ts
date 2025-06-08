@@ -5,7 +5,7 @@ export class APIError extends Error {
   constructor(
     message: string,
     public statusCode: number = 500,
-    public details?: any
+    public details?: unknown
   ) {
     super(message);
     this.name = 'APIError';
@@ -57,11 +57,15 @@ export const assertEnvVars = (vars: string[]): void => {
 };
 
 export const validateRequestBody = <T>(
-  body: any,
+  body: unknown,
   required: (keyof T)[],
   typeName: string
 ): void => {
-  const missing = required.filter(key => !(key in body));
+  if (typeof body !== 'object' || body === null) {
+    throw new APIError(`Invalid request body: expected object`, 400);
+  }
+  const obj = body as Record<string, unknown>;
+  const missing = required.filter(key => !(key in obj));
   if (missing.length > 0) {
     throw new APIError(
       `Missing required fields in ${typeName}: ${missing.join(', ')}`,
@@ -71,7 +75,7 @@ export const validateRequestBody = <T>(
 };
 
 export class ValidationError extends APIError {
-  constructor(message: string, details?: any) {
+  constructor(message: string, details?: unknown) {
     super(message, 400, details);
     this.name = 'ValidationError';
   }
@@ -79,7 +83,7 @@ export class ValidationError extends APIError {
 
 export const createErrorResponse = (
   message: string,
-  details?: any
+  details?: unknown
 ) => ({
   error: message,
   details,
@@ -90,7 +94,7 @@ export const createErrorResponse = (
 export const throwAPIError = (
   message: string,
   statusCode: number = 500,
-  details?: any
+  details?: unknown
 ): never => {
   throw new APIError(message, statusCode, details);
 };

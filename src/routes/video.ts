@@ -1,4 +1,5 @@
 import { Router, Request, Response } from 'express';
+import { random } from 'remotion';
 import { z } from 'zod';
 import { VideoRequest, VideoStatusResponse } from '../types/index.js';
 import { videoGenerator } from '../services/video-generator.js';
@@ -35,14 +36,14 @@ const jobs = new Map<string, {
 
 // Define route handlers
 const generateVideoHandler = async (
-  req: Request<{}, any, VideoRequest>,
+req: Request<object, unknown, VideoRequest>,
   res: Response
 ): Promise<void> => {
   try {
     // Validate request body
     const validatedData = videoRequestSchema.parse(req.body);
     
-    const jobId = Math.random().toString(36).substring(7);
+const jobId = random(null).toString(36).substring(7);
 
     // Initialize job status
     jobs.set(jobId, {
